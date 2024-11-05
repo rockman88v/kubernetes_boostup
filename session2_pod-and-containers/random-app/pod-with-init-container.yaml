@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: random-app-pod
+  labels:
+    app: random-app
+spec:
+  initContainers:
+    - name: init-random-app-config
+      image: busybox
+      command: ['sh', '-c', 'echo "MIN=1" > /config/app.env && echo "MAX=10" >> /config/app.env']
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  containers:
+    - name: random-app
+      image: random-app:latest  
+      ports:
+        - containerPort: 8080  
+      env:
+        - name: MIN
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: MIN
+        - name: MAX
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: MAX
+        - name: PORT
+          value: "8080"
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  volumes:
+    - name: config-volume
+      emptyDir: {}

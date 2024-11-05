@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: random-app-pod
+spec:
+  containers:
+    - name: random-app
+      image: random-app:latest  
+      ports:
+        - containerPort: 8080
+      env:
+        - name: MIN
+          value: "1"
+        - name: MAX
+          value: "10"
+        - name: PORT
+          value: "8080"
+    
+    - name: log-collector
+      image: busybox
+      command: ['sh', '-c', 'tail -f /var/log/random-app.log']
+      volumeMounts:
+        - name: log-volume
+          mountPath: /var/log
+          
+  volumes:
+    - name: log-volume
+      emptyDir: {}

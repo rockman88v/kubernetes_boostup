@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: random-app-pod
+spec:
+  containers:
+    - name: random-app
+      image: rockman88v/random-app:latest  # Hình ảnh từ Docker Hub private repo
+      ports:
+        - containerPort: 8080
+      env:
+        - name: MIN
+          value: "1"
+        - name: MAX
+          value: "10"
+        - name: PORT
+          value: "8080"
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "500m"
+        limits:
+          memory: "256Mi"
+          cpu: "1"
+  imagePullSecrets:
+    - name: my-dockerhub-secret  # Tham chiếu đến Secret đã tạo
