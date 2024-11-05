@@ -14,7 +14,7 @@ spec:
           mountPath: /config
   containers:
     - name: random-app
-      image: random-app:latest  
+      image: rockman88v/random-app:latest  
       ports:
         - containerPort: 8080  
       env:
