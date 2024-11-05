@@ -1,13 +1,29 @@
-Hướng dẫn xây dựng và chạy ứng dụng random-app trên Docker
-Tạo dự án: Tạo một thư mục và thêm các tệp trên (random.py, Dockerfile, requirements.txt).
-Tạo docker image: Mở terminal và điều hướng đến thư mục dự án, sau đó chạy lệnh:
-docker build -t random-app .
-Chạy container Docker : Chạy container và truyền vào các biến môi trường:
+# An example app and document to build & deploy to Kubernetes
+Apython app to generate a random number in range of MIN & MAX
+
+## Authors
+- Trinh Quoc Viet
+
+## Usage/Examples
+Build Docker Image:
+```javascript
+docker build -t your-repo/random-app:latest .
+```
+
+Push to your dockerhub account:
+```javascript
+docker push your-repo/random-app:latest
+```
+
+Run in Docker container:
+```javascript
 docker run -p 8080:8080 -e MIN=1 -e MAX=10 -e PORT=8080 random-app
+```
 
-Kiểm tra API : Mở trình duyệt hoặc sử dụng curl để kiểm tra các API:
-Kiểm tra trạng thái sẵn sàng:
-curl http://localhost:8080/ready
-
-Lấy số ngẫu nhiên:
-curl http://localhost:8080/random
+Call the api:
+```javascript
+#random api
+curl localhost:8080/random
+#healthcheck api
+curl localhost:8080/ready
+```
