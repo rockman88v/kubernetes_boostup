@@ -1,29 +1,33 @@
-# An example app and document to build & deploy to Kubernetes
-Apython app to generate a random number in range of MIN & MAX
+# An Example App and Document to Build & Deploy to Kubernetes
+
+A Python app to generate a random number in the range of `MIN` & `MAX`.
 
 ## Authors
 - Trinh Quoc Viet
 
 ## Usage/Examples
-Build Docker Image:
-```javascript
+
+### Build Docker Image
+```bash
 docker build -t your-repo/random-app:latest .
 ```
 
-Push to your dockerhub account:
-```javascript
+### Push to Your DockerHub Account
+```bash
 docker push your-repo/random-app:latest
 ```
 
-Run in Docker container:
-```javascript
+### Run in Docker Container
+```bash
 docker run -p 8080:8080 -e MIN=1 -e MAX=10 -e PORT=8080 random-app
 ```
 
-Call the api:
-```javascript
-#random api
+### Call the API
+#### Random API
+```bash
 curl localhost:8080/random
-#healthcheck api
-curl localhost:8080/ready
 ```
+
+#### Healthcheck API
+```bash
+curl localhost:8080/ready
